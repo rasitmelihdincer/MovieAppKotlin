@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     android:background="@color/main_bacground"
     tools:context=".ui.MovieFragment">
 
@@ -50,24 +54,42 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="match_parent">
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-                app:layout_constraintStart_toStartOf="@+id/recyclerView"
-                app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+                app:layout_constraintBottom_toBottomOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintTop_toTopOf="@+id/popularMovieRecyclerView" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/errorText"
+                app:layout_constraintBottom_toBottomOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/popularMovieRecyclerView"
+                app:layout_constraintTop_toTopOf="@+id/popularMovieRecyclerView"
+                android:text="Something went wrong!! Try Again "
+                android:textColor="@color/white"
+
+                />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/popularMovieRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

@@ -19,14 +19,10 @@ import java.util.concurrent.TimeUnit
 object ApiService {
 
     fun getData() : Api{
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        val client : OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor)
-            .connectTimeout(60,TimeUnit.SECONDS)
-            .readTimeout(60,TimeUnit.SECONDS).build()
+      //  val client : OkHttpClient = OkHttpClient.Builder().build()
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
+         //   .client(client)
             .build()
             .create(Api::class.java)
     }

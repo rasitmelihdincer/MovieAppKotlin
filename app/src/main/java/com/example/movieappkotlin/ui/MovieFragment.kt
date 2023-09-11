@@ -1,14 +1,19 @@
 package com.example.movieappkotlin.ui
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
 import com.example.movieappkotlin.R
@@ -21,6 +26,8 @@ class MovieFragment : Fragment() {
 
     private lateinit var binding : FragmentMovieBinding
     private val viewModel by viewModels<MovieViewModel>()
+    private lateinit var popularMoviesAdapter: PopularMoviesAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +41,8 @@ class MovieFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentMovieBinding.inflate(inflater,container,false)
+        val layoutManeger : RecyclerView.LayoutManager = LinearLayoutManager(context)
+        binding.popularMovieRecyclerView.layoutManager = layoutManeger
         return  binding.root
     }
 
@@ -43,8 +52,23 @@ class MovieFragment : Fragment() {
         observeLiveData()
     }
     private fun observeLiveData(){
-        viewModel.movieList.observe(viewLifecycleOwner){ list ->
-            println(list[1].title)
+        viewModel.movieList.observe(viewLifecycleOwner){
+            popularMoviesAdapter = PopularMoviesAdapter(it)
+            binding.popularMovieRecyclerView.adapter = popularMoviesAdapter
+        }
+        viewModel.loading.observe(viewLifecycleOwner){
+            if (it == true){
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+        viewModel.error.observe(viewLifecycleOwner){
+            if (it == true){
+                binding.errorText.visibility = View.VISIBLE
+            } else {
+                binding.errorText.visibility = View.GONE
+            }
         }
     }
 

@@ -28,31 +28,26 @@ class MovieViewModel : ViewModel() {
 
     val movieList = MutableLiveData<List<MovieItem>>()
     val loading = MutableLiveData<Boolean>()
-    val error = MutableLiveData<String>()
+    val error = MutableLiveData<Boolean>()
 
       fun getData(){
-
-        loading.value = true
-         viewModelScope.launch {
-             try {
-                val response = ApiService.getData().getMovies(Constants.TOKEN)
-                 if (response.isSuccessful){
-                     movieList.postValue(response.body()?.results)
-                 } else{
-                     if (response.message().isNullOrEmpty()){
-                         error.value = "error"
-                     } else{
-                         error.value = response.message()
-                     }
-                 }
-
-             } catch (e : Exception){
-               error.value = e.message
-             } finally {
-            loading.value = false
-             }
+          loading.value = true
+          error.value = false
+          viewModelScope.launch {
+                try {
+                    val response = ApiService.getData().getMovies(Constants.TOKEN)
+                    if (response.isSuccessful){
+                        movieList.postValue(response.body()?.results)
+                        loading.value = false
+                    } else{
+                        error.value = true
+                    }
+                } catch (e : Exception){
+                    e.printStackTrace()
+                    error.value = true
+                } finally {
+                    loading.value = false
+                }
          }
-
     }
-
 }
