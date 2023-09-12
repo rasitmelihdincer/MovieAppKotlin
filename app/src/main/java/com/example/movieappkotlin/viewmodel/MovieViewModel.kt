@@ -3,6 +3,7 @@ package com.example.movieappkotlin.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieappkotlin.Model.FavoriteModel
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
 import com.example.movieappkotlin.Service.ApiService
@@ -27,6 +28,7 @@ class MovieViewModel : ViewModel() {
 
 
     val movieList = MutableLiveData<List<MovieItem>>()
+    val favoriteList = FavoriteModel()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
 
@@ -38,6 +40,8 @@ class MovieViewModel : ViewModel() {
                     val response = ApiService.getData().getMovies(Constants.TOKEN)
                     if (response.isSuccessful){
                         movieList.postValue(response.body()?.results)
+                        favoriteList.name = response.body()?.results?.get(5)?.originalTitle
+                        println(favoriteList.name)
                         loading.value = false
                     } else{
                         error.value = true
@@ -47,7 +51,13 @@ class MovieViewModel : ViewModel() {
                     error.value = true
                 } finally {
                     loading.value = false
+
                 }
          }
+
     }
 }
+
+
+
+

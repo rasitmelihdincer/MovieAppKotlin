@@ -9,7 +9,7 @@ import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 import com.example.movieappkotlin.util.loadImage
 
-class PopularMoviesAdapter( val populerMoviesList : List<MovieItem>? ) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
+class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>? ) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
     class ViewHolder(val binding : PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -26,7 +26,6 @@ class PopularMoviesAdapter( val populerMoviesList : List<MovieItem>? ) : Recycle
         val movie = populerMoviesList?.get(position)
         holder.binding.populerMovieName.text = movie?.originalTitle
         movie?.posterPath?.let { holder.binding.populerMovieImage.loadImage(it) }
-
     }
 
 }

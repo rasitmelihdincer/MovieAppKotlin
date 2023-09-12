@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
+import com.example.movieappkotlin.Model.FavoriteModel
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
 import com.example.movieappkotlin.R
@@ -50,11 +51,13 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
         observeLiveData()
+
     }
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
             popularMoviesAdapter = PopularMoviesAdapter(it)
             binding.popularMovieRecyclerView.adapter = popularMoviesAdapter
+
         }
         viewModel.loading.observe(viewLifecycleOwner){
             if (it == true){

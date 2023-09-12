@@ -1,5 +1,6 @@
 package com.example.movieappkotlin.Service
 
+import com.example.movieappkotlin.Model.FavoriteModel
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
 import io.reactivex.rxjava3.core.Single
@@ -13,4 +14,5 @@ interface Api {
 
     @GET("popular")
      suspend fun getMovies(@Header("Authorization") token:String ) : Response<MovieResponse>
+     suspend fun getFavorite() : List<FavoriteModel>
 }

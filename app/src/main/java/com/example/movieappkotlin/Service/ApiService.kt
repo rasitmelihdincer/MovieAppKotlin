@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit
 object ApiService {
 
     fun getData() : Api{
-      //  val client : OkHttpClient = OkHttpClient.Builder().build()
+        val client : OkHttpClient = OkHttpClient.Builder().build()
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-         //   .client(client)
+            .client(client)
             .build()
             .create(Api::class.java)
     }
