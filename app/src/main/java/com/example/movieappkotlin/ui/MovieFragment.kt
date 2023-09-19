@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
+import com.example.movieappkotlin.Adapter.movieClick
 import com.example.movieappkotlin.Model.FavoriteModel
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
@@ -55,7 +59,15 @@ class MovieFragment : Fragment() {
     }
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
-            popularMoviesAdapter = PopularMoviesAdapter(it)
+            popularMoviesAdapter = PopularMoviesAdapter(it, object : movieClick{
+                override fun movieClicked(movieId: Int) {
+                     movieId?.let {
+                         val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(it)
+                         findNavController().navigate(action)
+                     }
+                }
+
+            })
             binding.popularMovieRecyclerView.adapter = popularMoviesAdapter
 
         }
@@ -69,6 +81,7 @@ class MovieFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner){
             if (it == true){
                 binding.errorText.visibility = View.VISIBLE
+                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
             } else {
                 binding.errorText.visibility = View.GONE
             }

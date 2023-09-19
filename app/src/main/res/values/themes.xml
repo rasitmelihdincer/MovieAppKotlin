@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.MovieAppKotlin" parent="Base.Theme.MovieAppKotlin" />
+
+    <style name="Theme.MovieAppKotlin.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+
+    </style>
+
+    <style name="Theme.MovieAppKotlin.AppWidgetContainer" parent="Theme.MovieAppKotlin.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+
+    </style>
 </resources>

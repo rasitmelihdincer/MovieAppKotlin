@@ -1,5 +1,6 @@
 package com.example.movieappkotlin.viewmodel
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -45,6 +46,7 @@ class MovieViewModel : ViewModel() {
                         loading.value = false
                     } else{
                         error.value = true
+
                     }
                 } catch (e : Exception){
                     e.printStackTrace()

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.movieappkotlin.databinding.FragmentLoginBinding
 import com.example.movieappkotlin.viewmodel.MovieViewModel
 
@@ -31,7 +32,7 @@ class LoginFragment : Fragment() {
 
         binding.loginButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToMovieFragment()
-            Navigation.findNavController(view).navigate(action)
+            findNavController().navigate(action)
         }
 
     }
