@@ -9,7 +9,7 @@ import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 import com.example.movieappkotlin.util.loadImage
 
-class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,private val movieClickListener : movieClick) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
+class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,private val movieClickListener : MovieClick) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
     class ViewHolder(val binding : PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -33,6 +33,6 @@ class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,priv
 
 }
 
-interface movieClick {
+interface MovieClick {
         fun movieClicked(movieId : Int)
 }

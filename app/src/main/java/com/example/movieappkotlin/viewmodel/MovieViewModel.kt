@@ -25,11 +25,10 @@ import retrofit2.Response
 
 class MovieViewModel : ViewModel() {
 
-    private val disposable = CompositeDisposable()
+
 
 
     val movieList = MutableLiveData<List<MovieItem>>()
-    val favoriteList = FavoriteModel()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
 
@@ -41,8 +40,6 @@ class MovieViewModel : ViewModel() {
                     val response = ApiService.getData().getMovies(Constants.TOKEN)
                     if (response.isSuccessful){
                         movieList.postValue(response.body()?.results)
-                        favoriteList.name = response.body()?.results?.get(5)?.originalTitle
-                        println(favoriteList.name)
                         loading.value = false
                     } else{
                         error.value = true

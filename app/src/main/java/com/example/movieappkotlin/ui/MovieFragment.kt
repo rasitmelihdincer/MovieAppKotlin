@@ -16,8 +16,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movieappkotlin.Adapter.MovieClick
 import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
-import com.example.movieappkotlin.Adapter.movieClick
 import com.example.movieappkotlin.Model.FavoriteModel
 import com.example.movieappkotlin.Model.MovieItem
 import com.example.movieappkotlin.Model.MovieResponse
@@ -59,13 +59,14 @@ class MovieFragment : Fragment() {
     }
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
-            popularMoviesAdapter = PopularMoviesAdapter(it, object : movieClick{
+            popularMoviesAdapter = PopularMoviesAdapter(it, object : MovieClick{
                 override fun movieClicked(movieId: Int) {
-                     movieId?.let {
-                         val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(it)
-                         findNavController().navigate(action)
-                     }
+                    movieId?.let {
+                        val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(it)
+                        findNavController().navigate(action)
+                    }
                 }
+
 
             })
             binding.popularMovieRecyclerView.adapter = popularMoviesAdapter
