@@ -13,7 +13,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.example.movieappkotlin.databinding.ActivityMainBinding
+import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.ui.FavoriteFragment
 import com.example.movieappkotlin.ui.MovieDetailFragment
 import com.example.movieappkotlin.ui.MovieFragment

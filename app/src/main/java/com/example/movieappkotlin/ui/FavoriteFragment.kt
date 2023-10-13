@@ -5,19 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
-import com.example.movieappkotlin.Model.FavoriteModel
-import com.example.movieappkotlin.R
+import com.example.movieappkotlin.model.FavoriteModel
 import com.example.movieappkotlin.databinding.FragmentFavoriteBinding
+import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var favoriteMoviesAdapter: FavoriteMoviesAdapter
-    private var favorites : FavoriteModel? = null
+    private lateinit var favoriteMoviesAdapter : FavoriteMoviesAdapter
+    private val viewModel by viewModels<FavoriteViewModel>()
+    var favorites : List<FavoriteModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +39,15 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         favoriteMoviesAdapter = FavoriteMoviesAdapter(favorites)
         binding.favoriteRecyclerView.adapter = favoriteMoviesAdapter
+       // observeData()
 
     }
+
+
+    private fun observeData(){
+        viewModel.getFavoriteMovies.observe(viewLifecycleOwner){
+
+        }
+    }
+
 }

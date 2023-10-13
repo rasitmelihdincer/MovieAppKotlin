@@ -1,27 +1,12 @@
 package com.example.movieappkotlin.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieappkotlin.Model.FavoriteModel
-import com.example.movieappkotlin.Model.MovieItem
-import com.example.movieappkotlin.Model.MovieResponse
+import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.Service.ApiService
 import com.example.movieappkotlin.util.Constants
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.core.SingleObserver
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.internal.operators.single.SingleObserveOn
-import io.reactivex.rxjava3.observers.DisposableSingleObserver
-import io.reactivex.rxjava3.schedulers.Schedulers
-import io.reactivex.rxjava3.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MovieViewModel : ViewModel() {
 
@@ -32,6 +17,9 @@ class MovieViewModel : ViewModel() {
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
 
+    init {
+        getData()
+    }
       fun getData(){
           loading.value = true
           error.value = false

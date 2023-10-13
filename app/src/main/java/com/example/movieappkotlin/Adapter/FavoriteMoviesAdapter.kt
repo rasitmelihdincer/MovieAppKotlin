@@ -3,10 +3,11 @@ package com.example.movieappkotlin.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieappkotlin.Model.FavoriteModel
-import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 
-class FavoriteMoviesAdapter(val favoriteList : FavoriteModel?) : RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
+import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
+import com.example.movieappkotlin.model.FavoriteModel
+
+class FavoriteMoviesAdapter(val favoriteList : List<FavoriteModel>?) : RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
     class ViewHolder(val binding : PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -20,7 +21,6 @@ class FavoriteMoviesAdapter(val favoriteList : FavoriteModel?) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        println(favoriteList?.name)
-        holder.binding.populerMovieName.text = favoriteList?.name
+        holder.binding.populerMovieName.text = favoriteList?.get(position)?.title
     }
 }

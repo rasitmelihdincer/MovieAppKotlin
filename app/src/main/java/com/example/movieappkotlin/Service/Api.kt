@@ -1,11 +1,7 @@
 package com.example.movieappkotlin.Service
 
-import com.example.movieappkotlin.Model.FavoriteModel
-import com.example.movieappkotlin.Model.MovieDetail
-import com.example.movieappkotlin.Model.MovieItem
-import com.example.movieappkotlin.Model.MovieResponse
-import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
+import com.example.movieappkotlin.model.MovieDetail
+import com.example.movieappkotlin.model.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
 import com.example.movieappkotlin.R
 import com.example.movieappkotlin.databinding.FragmentMovieDetailBinding
 import com.example.movieappkotlin.util.loadImage
@@ -33,6 +37,14 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDetailData(requireArguments().getInt("movieId"))
         observeData()
+        binding.backButton.setOnClickListener {
+            val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieFragment()
+            findNavController().navigate(action)
+        }
+        binding.favoriteButton.setOnClickListener {
+            viewModel.addMovieToFavorite()
+            Toast.makeText(context,"Added Favorite",Toast.LENGTH_LONG).show()
+        }
     }
 
     fun observeData(){
@@ -54,9 +66,14 @@ class MovieDetailFragment : Fragment() {
         viewModel.movieDetailList.observe(viewLifecycleOwner){
             it.backdropPath?.let { it1 -> binding.imageView4.loadImage(it1) }
             binding.movieTime.text = "${it.runtime.toString()} m"
+            binding.movieSummary.text = it.overview
+            binding.movieVote.text = it.voteAverage.toString()
+            binding.movieDate.text = it.releaseDate
         }
 
     }
+
+
 
 
 }

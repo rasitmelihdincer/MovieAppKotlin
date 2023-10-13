@@ -3,23 +3,29 @@ package com.example.movieappkotlin.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.movieappkotlin.Model.MovieItem
+import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 import com.example.movieappkotlin.util.loadImage
 
 class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,private val movieClickListener : MovieClick) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
-    class ViewHolder(val binding : PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class ViewHolder(val binding: PopularMoviesItemsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-         return ViewHolder(PopularMoviesItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(
+            PopularMoviesItemsBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
-       return populerMoviesList!!.size
+        return populerMoviesList!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,12 +33,15 @@ class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,priv
         holder.binding.populerMovieName.text = movie?.originalTitle
         movie?.posterPath?.let { holder.binding.populerMovieImage.loadImage(it) }
         holder.binding.root.setOnClickListener {
-            movie?.id?.let { it1 -> movieClickListener.movieClicked(it1) }
+            movie?.id?.let {
+                movieClickListener.movieClicked(it)
+
+            }
         }
+
     }
 
-}
-
-interface MovieClick {
-        fun movieClicked(movieId : Int)
+    interface MovieClick {
+        fun movieClicked(movieId: Int)
+    }
 }

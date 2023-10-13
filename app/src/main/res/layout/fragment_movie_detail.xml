@@ -41,7 +41,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/backButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/baseline_arrow_back_ios_new_24"
@@ -50,7 +50,7 @@
             app:tint="@color/white" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/favoriteButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/baseline_favorite_24"
@@ -89,6 +89,7 @@
         tools:layout_editor_absoluteX="50dp">
 
         <TextView
+            android:id="@+id/movieVote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,6 +111,7 @@
             android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/movieDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -136,6 +138,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/movieSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
