@@ -9,10 +9,10 @@ data class FavoriteModel(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo("id")
-    val id : Int? = null,
+    var id : Int? = null,
 
     @ColumnInfo("title")
-    val title : String? = null,
+    var title : String? = null,
 
     @SerializedName("original_title")
     @ColumnInfo("original_title")

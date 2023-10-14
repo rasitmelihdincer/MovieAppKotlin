@@ -2,25 +2,40 @@ package com.example.movieappkotlin.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 import com.example.movieappkotlin.model.FavoriteModel
+import com.example.movieappkotlin.util.DiffUtilCallback
 
-class FavoriteMoviesAdapter(val favoriteList : List<FavoriteModel>?) : RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
-    class ViewHolder(val binding : PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+class FavoriteMoviesAdapter() : ListAdapter<FavoriteModel, FavoriteMoviesAdapter.FavoriteViewHolder>(
+    DiffUtilCallback<FavoriteModel>(
+        itemsTheSame = { oldItem, newItem ->
+            oldItem == newItem
+        },
+        contentsTheSame = { oldItem, newItem ->
+            oldItem == newItem
+        }
+    )
+) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoriteViewHolder(
+        PopularMoviesItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+    )
+
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+        holder.bind(currentList[position])
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(PopularMoviesItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-    }
 
-    override fun getItemCount(): Int {
-        return 10
-    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.populerMovieName.text = favoriteList?.get(position)?.title
+    inner class FavoriteViewHolder(val binding:PopularMoviesItemsBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(favMovie:FavoriteModel) = with(binding){
+         //   binding.populerMovieName.text = favMovie.originalTitle
+            movie = favMovie
+
+
+        }
     }
 }

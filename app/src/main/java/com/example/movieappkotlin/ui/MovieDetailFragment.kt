@@ -36,7 +36,7 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDetailData(requireArguments().getInt("movieId"))
-        observeData()
+
         binding.backButton.setOnClickListener {
             val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieFragment()
             findNavController().navigate(action)
@@ -45,6 +45,7 @@ class MovieDetailFragment : Fragment() {
             viewModel.addMovieToFavorite()
             Toast.makeText(context,"Added Favorite",Toast.LENGTH_LONG).show()
         }
+        observeData()
     }
 
     fun observeData(){
@@ -69,6 +70,7 @@ class MovieDetailFragment : Fragment() {
             binding.movieSummary.text = it.overview
             binding.movieVote.text = it.voteAverage.toString()
             binding.movieDate.text = it.releaseDate
+
         }
 
     }

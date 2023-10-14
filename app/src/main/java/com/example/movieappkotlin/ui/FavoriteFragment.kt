@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +18,8 @@ import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var favoriteMoviesAdapter : FavoriteMoviesAdapter
-    private val viewModel by viewModels<FavoriteViewModel>()
+    private val favAdapter by lazy { FavoriteMoviesAdapter() }
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
     var favorites : List<FavoriteModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +33,21 @@ class FavoriteFragment : Fragment() {
         binding = FragmentFavoriteBinding.inflate(inflater,container,false)
         val layoutManeger : RecyclerView.LayoutManager = LinearLayoutManager(context)
         binding.favoriteRecyclerView.layoutManager = layoutManeger
+    //    favAdapter = FavoriteMoviesAdapter()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        favoriteMoviesAdapter = FavoriteMoviesAdapter(favorites)
-        binding.favoriteRecyclerView.adapter = favoriteMoviesAdapter
-       // observeData()
-
+        binding.favoriteRecyclerView.adapter = favAdapter
+        observeData()
     }
 
 
     private fun observeData(){
-        viewModel.getFavoriteMovies.observe(viewLifecycleOwner){
-
+        favoriteViewModel.getFavoriteMovies.observe(viewLifecycleOwner){
+            favAdapter.submitList(it)
         }
     }
 

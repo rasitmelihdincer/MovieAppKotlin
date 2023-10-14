@@ -17,17 +17,24 @@ import androidx.room.Room
 import com.example.movieappkotlin.databinding.ActivityMainBinding
 import com.example.movieappkotlin.local.MovieDao
 import com.example.movieappkotlin.local.MovieDatabase
+import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.ui.FavoriteFragment
 import com.example.movieappkotlin.ui.MovieDetailFragment
 import com.example.movieappkotlin.ui.MovieFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+    private lateinit var repository : MovieRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val movieDao = MovieDatabase.getFavoriteMovieDatabase(applicationContext).getMovieFromDao()
+        repository = MovieRepository(movieDao)
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> {
@@ -44,6 +51,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setupNav()
+
+
     }
 
     private fun replaceFragment(fragment : Fragment){

@@ -44,11 +44,9 @@ class MovieDetailViewModel : ViewModel() {
                 movieRepo?.addMovieToFavorite(
                     FavoriteModel(it.id,it.posterPath,it.title)
                 )
+                println(movieDetailList.value!!.id)
             }
         }
     }
-
-
-
 
 }
