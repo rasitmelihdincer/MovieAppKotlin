@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.example.movieappkotlin.MainActivity
 import com.example.movieappkotlin.databinding.FragmentLoginBinding
 import com.example.movieappkotlin.viewmodel.MovieViewModel
 
@@ -36,6 +37,16 @@ class LoginFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).hideBottomBar()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).showBottomBar()
     }
 
 

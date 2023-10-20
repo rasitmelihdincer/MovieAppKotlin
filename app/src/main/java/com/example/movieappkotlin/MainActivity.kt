@@ -34,12 +34,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView2 ) as NavHostFragment
         val navController = navHostFragment.navController
         setupWithNavController(binding.bottomNavigationView,navController)
+    }
 
+    fun hideBottomBar(){
+        binding.bottomNavigationView.visibility = View.GONE
+    }
+    fun showBottomBar(){
+        binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
 

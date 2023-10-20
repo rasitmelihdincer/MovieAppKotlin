@@ -24,6 +24,7 @@
         android:background="#282f32"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
+        app:itemRippleColor="@color/green"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
