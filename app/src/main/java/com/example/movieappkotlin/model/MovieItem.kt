@@ -1,6 +1,7 @@
 package com.example.movieappkotlin.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MovieItem (
     @SerializedName("adult"             ) var adult            : Boolean?       = null,
@@ -17,5 +18,4 @@ data class MovieItem (
     @SerializedName("video"             ) var video            : Boolean?       = null,
 //    @SerializedName("vote_average"      ) var voteAverage      : Int?           = null,
     @SerializedName("vote_count"        ) var voteCount        : Int?           = null
-
 )

@@ -17,6 +17,7 @@ import com.example.movieappkotlin.databinding.FragmentMovieDetailBinding
 import com.example.movieappkotlin.local.MovieDao
 import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.model.MovieDetail
+import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.repo.MovieRepository
 
 import com.example.movieappkotlin.util.loadImage
@@ -28,6 +29,7 @@ import com.example.movieappkotlin.viewmodel.MovieDetailViewModel
 class MovieDetailFragment : Fragment() {
     private lateinit var binding : FragmentMovieDetailBinding
     private lateinit var  viewModel : MovieDetailViewModel
+    val args : MovieDetailFragmentArgs by navArgs()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,7 @@ class MovieDetailFragment : Fragment() {
         }
 
         binding.favoriteButton.setOnClickListener {
-            viewModel.savedMovie(MovieDetail())
+            viewModel.savedMovie(MovieDetail(requireArguments().getInt("movieId"),requireArguments().getString("movieTitle")))
             Toast.makeText(requireContext(),"saved",Toast.LENGTH_LONG).show()
         }
         observeData()

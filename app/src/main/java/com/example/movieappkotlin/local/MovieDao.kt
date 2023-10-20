@@ -2,6 +2,7 @@ package com.example.movieappkotlin.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,7 +19,8 @@ interface MovieDao {
 /*
     @Query("DELETE FROM favoriteTable WHERE id=:favId")
      fun deleteMovieFromFavorite(favId : Int)
-
  */
+     @Delete
+     fun deleteFavoriteMovie(movieDetail: MovieDetail)
 
 }

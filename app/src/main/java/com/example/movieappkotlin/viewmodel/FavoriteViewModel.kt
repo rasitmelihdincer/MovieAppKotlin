@@ -25,6 +25,11 @@ class FavoriteViewModel(val movieRepository: MovieRepository): ViewModel() {
     }
 
       fun getSavedMovie() = movieRepository.getFavoriteMovie()
+    fun deleteMovie(movie: MovieDetail) {
+        viewModelScope.launch {
+            movieRepository.deleteMovie(movie)
+        }
+    }
 
 
 

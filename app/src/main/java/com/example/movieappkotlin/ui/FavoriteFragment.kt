@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
@@ -16,7 +17,7 @@ import com.example.movieappkotlin.databinding.FragmentFavoriteBinding
 import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.viewmodel.FavoriteViewModel
-
+import com.google.android.material.snackbar.Snackbar
 
 
 class FavoriteFragment : Fragment() {
@@ -46,7 +47,7 @@ class FavoriteFragment : Fragment() {
         val repository = MovieRepository(MovieDatabase(requireContext()))
         favoriteViewModel = FavoriteViewModel(repository)
         setUpRecyclerView()
-
+        swipeFunction()
         favoriteViewModel.getSavedMovie().observe(viewLifecycleOwner, Observer {
             favoriteAdapter.differ.submitList(it)
         })
@@ -61,6 +62,38 @@ class FavoriteFragment : Fragment() {
         }
     }
 
+    private fun swipeFunction(){
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val movies = favoriteAdapter.differ.currentList[position]
+                favoriteViewModel.deleteMovie(movies)
+                view?.let {
+                    Snackbar.make(it,"deleteed", Snackbar.LENGTH_LONG).apply {
+                        setAction("undo"){
+                            favoriteViewModel.savedMovie(movies)
+                        }
+                        show()
+                    }
+                }
+            }
+
+        }
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(binding.favoriteRecyclerView)
+        }
+    }
 
 }
 

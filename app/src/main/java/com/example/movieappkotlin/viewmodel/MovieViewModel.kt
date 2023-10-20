@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.Service.ApiService
+import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.util.Constants
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,7 @@ class MovieViewModel : ViewModel() {
 
 
 
-    val movieList = MutableLiveData<List<MovieItem>>()
+    val movieList = MutableLiveData<List<MovieDetail>>()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
 

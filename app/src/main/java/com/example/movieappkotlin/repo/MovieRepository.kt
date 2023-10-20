@@ -10,4 +10,6 @@ class MovieRepository (private val movieDb: MovieDatabase)
                          {
      suspend fun addFavoriteMovie(movie : MovieDetail) = movieDb.getMovieFromDao().addMovieFavorite(movie)
       fun getFavoriteMovie() = movieDb.getMovieFromDao().getFavoriteMovie()
+
+      suspend fun deleteMovie(movie: MovieDetail) = movieDb.getMovieFromDao().deleteFavoriteMovie(movie)
 }

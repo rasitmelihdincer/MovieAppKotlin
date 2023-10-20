@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <argument
+            android:name="movieTitle"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"

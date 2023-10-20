@@ -14,6 +14,7 @@ import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
 import com.example.movieappkotlin.databinding.FragmentMovieBinding
 import com.example.movieappkotlin.local.MovieDao
 import com.example.movieappkotlin.local.MovieDatabase
+import com.example.movieappkotlin.model.MovieDetail
 
 import com.example.movieappkotlin.viewmodel.MovieViewModel
 
@@ -52,9 +53,9 @@ class MovieFragment : Fragment() {
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
             popularMoviesAdapter = PopularMoviesAdapter(it, object : PopularMoviesAdapter.MovieClick{
-                override fun movieClicked(movieId: Int) {
-                     val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieId)
-                     findNavController().navigate(action)
+                override fun movieClicked(movieId: Int, movieTitle: String) {
+                    val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieId,movieTitle)
+                    findNavController().navigate(action)
                 }
 
             })
