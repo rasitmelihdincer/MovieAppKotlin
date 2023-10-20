@@ -1,5 +1,6 @@
 package com.example.movieappkotlin.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,16 +10,26 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
+import androidx.navigation.fragment.navArgs
+
 import com.example.movieappkotlin.R
 import com.example.movieappkotlin.databinding.FragmentMovieDetailBinding
+import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.local.MovieDatabase
+import com.example.movieappkotlin.model.MovieDetail
+import com.example.movieappkotlin.repo.MovieRepository
+
 import com.example.movieappkotlin.util.loadImage
+import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 import com.example.movieappkotlin.viewmodel.MovieDetailViewModel
+
 
 
 class MovieDetailFragment : Fragment() {
     private lateinit var binding : FragmentMovieDetailBinding
-    private val viewModel by viewModels<MovieDetailViewModel>()
+    private lateinit var  viewModel : MovieDetailViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,19 +42,22 @@ class MovieDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMovieDetailBinding.inflate(layoutInflater,container,false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val repository = MovieRepository(MovieDatabase(requireContext()))
+        viewModel = MovieDetailViewModel(repository)
         viewModel.getDetailData(requireArguments().getInt("movieId"))
-
         binding.backButton.setOnClickListener {
             val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieFragment()
             findNavController().navigate(action)
         }
+
         binding.favoriteButton.setOnClickListener {
-            viewModel.addMovieToFavorite()
-            Toast.makeText(context,"Added Favorite",Toast.LENGTH_LONG).show()
+            viewModel.savedMovie(MovieDetail())
+            Toast.makeText(requireContext(),"saved",Toast.LENGTH_LONG).show()
         }
         observeData()
     }

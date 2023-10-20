@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="movie"
-            type="com.example.movieappkotlin.model.FavoriteModel" />
-    </data>
-<androidx.constraintlayout.widget.ConstraintLayout
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
@@ -41,7 +35,9 @@
             android:layout_marginTop="24dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:text="@{movie.title}"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+

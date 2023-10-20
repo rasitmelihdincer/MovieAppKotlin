@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+/*
 @Entity("favoriteTable")
 data class FavoriteModel(
 
@@ -21,3 +22,5 @@ data class FavoriteModel(
     @ColumnInfo("poster_path")
     @SerializedName("poster_path") var posterPath : String?  = null,
 )
+
+ */

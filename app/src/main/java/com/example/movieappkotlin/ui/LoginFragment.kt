@@ -12,6 +12,7 @@ import com.example.movieappkotlin.databinding.FragmentLoginBinding
 import com.example.movieappkotlin.viewmodel.MovieViewModel
 
 
+
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {

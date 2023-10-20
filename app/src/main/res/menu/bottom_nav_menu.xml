@@ -3,18 +3,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/person"
-        android:title="Person"
+        android:id="@+id/movieFragment"
+        android:title="Movies"
         android:iconTint="@color/white"
         android:icon="@drawable/btn_1"/>
     <item
-        android:id="@+id/home"
-        android:title="Home"
+        android:id="@+id/favoriteFragment"
+        android:title="Favorite"
         android:iconTint="@color/white"
         android:icon="@drawable/btn_2"/>
-    <item
-        android:id="@+id/settings"
-        android:title="Settings"
-        android:iconTint="@color/white"
-        android:icon="@drawable/btn_3"/>
+    <item android:id="@+id/loginFragment"
+        android:title="login"
+        />
+
 </menu>

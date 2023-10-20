@@ -12,13 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
 import com.example.movieappkotlin.databinding.FragmentMovieBinding
+import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.local.MovieDatabase
+
 import com.example.movieappkotlin.viewmodel.MovieViewModel
+
+
 
 class MovieFragment : Fragment() {
 
     private lateinit var binding : FragmentMovieBinding
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
+    private var movieDao : MovieDao? = null
 
 
 
@@ -35,7 +41,6 @@ class MovieFragment : Fragment() {
         binding = FragmentMovieBinding.inflate(inflater,container,false)
         val layoutManeger : RecyclerView.LayoutManager = LinearLayoutManager(context)
         binding.popularMovieRecyclerView.layoutManager = layoutManeger
-
         return  binding.root
     }
 

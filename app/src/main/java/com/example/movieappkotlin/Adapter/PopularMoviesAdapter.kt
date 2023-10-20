@@ -40,7 +40,6 @@ class PopularMoviesAdapter(private val populerMoviesList : List<MovieItem>?,priv
         }
 
     }
-
     interface MovieClick {
         fun movieClicked(movieId: Int)
     }

@@ -4,28 +4,30 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.movieappkotlin.model.FavoriteModel
+import com.example.movieappkotlin.model.MovieDetail
+import java.util.concurrent.locks.Lock
 
 
-@Database(entities = [FavoriteModel::class], version = 1 , exportSchema = false)
+@Database(entities = [MovieDetail::class], version = 1 , exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun getMovieFromDao(): MovieDao
 
-
     companion object{
         private var INSTANCE: MovieDatabase? = null
+        private val LOCK = Any()
 
-        fun getFavoriteMovieDatabase(context: Context): MovieDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    MovieDatabase::class.java,
-                    "favorite-database"
-                ).fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                instance
+        operator fun invoke(context: Context): MovieDatabase {
+            return INSTANCE ?: synchronized(LOCK) {
+                INSTANCE ?: createDataBase(context).also { INSTANCE = it  }
             }
+        }
+
+        private fun createDataBase(context: Context): MovieDatabase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                MovieDatabase::class.java,
+                "movie-db"
+            ).allowMainThreadQueries().build() // Düzeltme: Gerçek ArticleDatabase örneğini almak için build() fonksiyonunu kullanın
         }
     }
 }

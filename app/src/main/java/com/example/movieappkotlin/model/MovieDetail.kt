@@ -1,13 +1,17 @@
 package com.example.movieappkotlin.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "movieTable")
 data class MovieDetail (
+    @PrimaryKey(autoGenerate = true)
+    @SerializedName("id"                    ) var id                  : Int?                           = null,
     @SerializedName("adult"                 ) var adult               : Boolean?                       = null,
     @SerializedName("backdrop_path"         ) var backdropPath        : String?                        = null,
     @SerializedName("budget"                ) var budget              : Int?                           = null,
     @SerializedName("homepage"              ) var homepage            : String?                        = null,
-    @SerializedName("id"                    ) var id                  : Int?                           = null,
     @SerializedName("imdb_id"               ) var imdbId              : String?                        = null,
     @SerializedName("original_language"     ) var originalLanguage    : String?                        = null,
     @SerializedName("original_title"        ) var originalTitle       : String?                        = null,

@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
-    id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
 
@@ -83,8 +82,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     //dagger-hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    annotationProcessor ("com.google.dagger:hilt-compiler:2.48.1")
-    kapt ("com.google.dagger:hilt-compiler:2.48.1")
+
 
 }

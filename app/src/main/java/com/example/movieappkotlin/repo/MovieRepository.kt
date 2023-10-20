@@ -1,22 +1,13 @@
 package com.example.movieappkotlin.repo
 
-import com.example.movieappkotlin.model.FavoriteModel
+
 import com.example.movieappkotlin.Service.Api
 import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.local.MovieDatabase
+import com.example.movieappkotlin.model.MovieDetail
 
-
-class MovieRepository(  private val favoriteDb : MovieDao) {
-
-    suspend fun addMovieToFavorite(movie : FavoriteModel){
-        favoriteDb.addMovieFavorite(movie)
-    }
-    suspend fun getMovieToFavorite() : List<FavoriteModel>{
-        return favoriteDb.getFavoriteMovie()
-    }
-    /*
-    suspend fun deleteMovieFromFavorite(favId : Int){
-        favoriteDb.deleteMovieFromFavorite(favId)
-    }
-
-     */
+class MovieRepository (private val movieDb: MovieDatabase)
+                         {
+     suspend fun addFavoriteMovie(movie : MovieDetail) = movieDb.getMovieFromDao().addMovieFavorite(movie)
+      fun getFavoriteMovie() = movieDb.getMovieFromDao().getFavoriteMovie()
 }

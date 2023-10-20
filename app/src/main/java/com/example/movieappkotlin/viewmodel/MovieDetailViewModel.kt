@@ -1,21 +1,22 @@
 package com.example.movieappkotlin.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieappkotlin.model.FavoriteModel
 import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.Service.ApiService
+import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.util.Constants
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel : ViewModel() {
+class MovieDetailViewModel( val movieRepository: MovieRepository) : ViewModel() {
 
     var movieDetailList = MutableLiveData<MovieDetail>()
     var isloading = MutableLiveData<Boolean>()
     var error = MutableLiveData<Boolean>()
-    private val movieRepo : MovieRepository? = null
 
     fun getDetailData(movieId : Int){
         viewModelScope.launch {
@@ -37,16 +38,9 @@ class MovieDetailViewModel : ViewModel() {
         }
         }
     }
-
-    fun addMovieToFavorite(){
+    fun savedMovie(movie : MovieDetail){
         viewModelScope.launch {
-            movieDetailList.value?.let {
-                movieRepo?.addMovieToFavorite(
-                    FavoriteModel(it.id,it.posterPath,it.title)
-                )
-                println(movieDetailList.value!!.id)
-            }
+            movieRepository.addFavoriteMovie(movie)
         }
     }
-
 }
