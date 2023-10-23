@@ -6,15 +6,20 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface Api {
 
-     @GET("popular")
+     @GET("3/movie/popular")
      suspend fun getMovies(@Header("Authorization") token:String ) : Response<MovieResponse>
 
-     @GET("{movieId}")
+     @GET("3/movie/{movieId}")
      suspend fun getMovieDetail(@Path("movieId") movieId : String,@Header("Authorization") token: String) : Response<MovieDetail>
+
+     @GET("3/search/movie")
+     suspend fun getSearchMovie(@Query("query") query : String,@Query("page") page : Int = 1,@Header("Authorization") token: String) : Response<MovieResponse>
+
 
 
 }

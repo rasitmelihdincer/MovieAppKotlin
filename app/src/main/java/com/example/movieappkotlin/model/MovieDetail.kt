@@ -16,7 +16,6 @@ data class MovieDetail (
     @SerializedName("homepage"              ) var homepage            : String?                        = null,
     @SerializedName("imdb_id"               ) var imdbId              : String?                        = null,
     @SerializedName("original_language"     ) var originalLanguage    : String?                        = null,
-
     @SerializedName("overview"              ) var overview            : String?                        = null,
     @SerializedName("popularity"            ) var popularity          : Double?                        = null,
     @SerializedName("poster_path"           ) var posterPath          : String?                        = null,

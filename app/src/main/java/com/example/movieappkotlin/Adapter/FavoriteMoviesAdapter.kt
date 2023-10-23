@@ -44,11 +44,6 @@ class FavoriteMoviesAdapter : RecyclerView.Adapter<FavoriteMoviesAdapter.Article
         holder.itemView.apply {
             holder.binding.populerMovieName.text = favoriteMovie.originalTitle
             favoriteMovie.posterPath?.let { holder.binding.populerMovieImage.loadImage(it) }
-            setOnClickListener {
-                onItemClickListener?.let {
-                    it(favoriteMovie) }
-            }
-
         }
     }
 
