@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    id("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
     kotlin("kapt")
 }
 
@@ -46,7 +48,7 @@ android {
 
 dependencies {
     val nav_version = "2.7.4"
-    val room_version = "2.5.2"
+    val room_version = "2.6.0"
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -82,6 +84,10 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     //dagger-hilt
+    val dagger_version = "2.48.1"
+    implementation ("com.google.dagger:hilt-android:2.48.1")
+    annotationProcessor ("com.google.dagger:hilt-compiler:2.48.1")
+    kapt ("com.google.dagger:hilt-compiler:2.48.1")
 
 
 }

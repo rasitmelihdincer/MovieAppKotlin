@@ -40,6 +40,9 @@
         <argument
             android:name="movieTitle"
             app:argType="string" />
+        <argument
+            android:name="moviePoster"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"

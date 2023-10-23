@@ -3,7 +3,6 @@ package com.example.movieappkotlin.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.databinding.PopularMoviesItemsBinding
 import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.util.loadImage
@@ -35,13 +34,17 @@ class PopularMoviesAdapter(private val populerMoviesList : List<MovieDetail>?, p
         movie?.posterPath?.let { holder.binding.populerMovieImage.loadImage(it) }
         holder.binding.root.setOnClickListener {
             movie?.id?.let {
-                movie.originalTitle?.let { it1 -> movieClickListener.movieClicked(it, it1) }
+                movie.originalTitle?.let { it1 -> movie.posterPath?.let { it2 ->
+                    movieClickListener.movieClicked(it, it1,
+                        it2
+                    )
+                } }
             }
 
         }
 
     }
     interface MovieClick {
-        fun movieClicked(movieId: Int , movieTitle : String)
+        fun movieClicked(movieId: Int , movieTitle : String, moviePoster : String)
     }
 }

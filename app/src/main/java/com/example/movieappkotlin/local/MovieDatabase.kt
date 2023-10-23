@@ -27,7 +27,7 @@ abstract class MovieDatabase : RoomDatabase() {
                 context.applicationContext,
                 MovieDatabase::class.java,
                 "movie-db"
-            ).allowMainThreadQueries().build() // Düzeltme: Gerçek ArticleDatabase örneğini almak için build() fonksiyonunu kullanın
+            ).allowMainThreadQueries().build()
         }
     }
 }

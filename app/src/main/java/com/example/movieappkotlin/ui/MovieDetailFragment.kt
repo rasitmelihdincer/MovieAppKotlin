@@ -1,6 +1,5 @@
 package com.example.movieappkotlin.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,28 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 
-import com.example.movieappkotlin.R
 import com.example.movieappkotlin.databinding.FragmentMovieDetailBinding
-import com.example.movieappkotlin.local.MovieDao
-import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.model.MovieDetail
-import com.example.movieappkotlin.model.MovieItem
-import com.example.movieappkotlin.repo.MovieRepository
 
 import com.example.movieappkotlin.util.loadImage
-import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 import com.example.movieappkotlin.viewmodel.MovieDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
     private lateinit var binding : FragmentMovieDetailBinding
-    private lateinit var  viewModel : MovieDetailViewModel
-    val args : MovieDetailFragmentArgs by navArgs()
+    private val viewModel: MovieDetailViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +40,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = MovieRepository(MovieDatabase(requireContext()))
-        viewModel = MovieDetailViewModel(repository)
+
         viewModel.getDetailData(requireArguments().getInt("movieId"))
         binding.backButton.setOnClickListener {
             val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieFragment()
@@ -58,13 +48,13 @@ class MovieDetailFragment : Fragment() {
         }
 
         binding.favoriteButton.setOnClickListener {
-            viewModel.savedMovie(MovieDetail(requireArguments().getInt("movieId"),requireArguments().getString("movieTitle")))
-            Toast.makeText(requireContext(),"saved",Toast.LENGTH_LONG).show()
+            viewModel.savedMovie(MovieDetail(requireArguments().getInt("movieId"),requireArguments().getString("movieTitle"),requireArguments().getString("moviePoster")))
+            Toast.makeText(requireContext(),"Added to Favorites",Toast.LENGTH_LONG).show()
         }
         observeData()
     }
 
-    fun observeData(){
+    private fun observeData(){
         viewModel.isloading.observe(viewLifecycleOwner){
              if (it == true){
                  binding.progressBar2.visibility = View.VISIBLE

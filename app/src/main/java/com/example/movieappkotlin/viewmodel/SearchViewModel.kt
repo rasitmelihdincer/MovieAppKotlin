@@ -3,16 +3,14 @@ package com.example.movieappkotlin.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.load.engine.Resource
-import com.example.movieappkotlin.model.MovieDetail
-import com.example.movieappkotlin.model.MovieItem
 import com.example.movieappkotlin.model.MovieResponse
 import com.example.movieappkotlin.repo.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Response
+import javax.inject.Inject
 
-
-class SearchViewModel(val movieRepository: MovieRepository) : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(val movieRepository: MovieRepository) : ViewModel() {
 
     var searchMovie = MutableLiveData<MovieResponse>()
     var searchPage = 1

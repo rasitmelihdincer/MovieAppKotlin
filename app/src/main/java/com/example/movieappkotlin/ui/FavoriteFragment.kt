@@ -18,13 +18,14 @@ import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
     lateinit var favoriteAdapter : FavoriteMoviesAdapter
-    private lateinit var favoriteViewModel : FavoriteViewModel
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +45,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = MovieRepository(MovieDatabase(requireContext()))
-        favoriteViewModel = FavoriteViewModel(repository)
         setUpRecyclerView()
         swipeFunction()
         favoriteViewModel.getSavedMovie().observe(viewLifecycleOwner, Observer {
@@ -80,8 +79,8 @@ class FavoriteFragment : Fragment() {
                 val movies = favoriteAdapter.differ.currentList[position]
                 favoriteViewModel.deleteMovie(movies)
                 view?.let {
-                    Snackbar.make(it,"deleteed", Snackbar.LENGTH_LONG).apply {
-                        setAction("undo"){
+                    Snackbar.make(it,"Deleted", Snackbar.LENGTH_LONG).apply {
+                        setAction("Undo"){
                             favoriteViewModel.savedMovie(movies)
                         }
                         show()

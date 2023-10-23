@@ -9,13 +9,14 @@ import com.example.movieappkotlin.local.MovieDatabase
 
 import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.repo.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-
-class FavoriteViewModel(val movieRepository: MovieRepository): ViewModel() {
-
+@HiltViewModel
+class FavoriteViewModel @Inject constructor(val movieRepository: MovieRepository): ViewModel() {
 
 
     fun savedMovie(movie : MovieDetail){
@@ -24,7 +25,7 @@ class FavoriteViewModel(val movieRepository: MovieRepository): ViewModel() {
         }
     }
 
-      fun getSavedMovie() = movieRepository.getFavoriteMovie()
+    fun getSavedMovie() = movieRepository.getFavoriteMovie()
     fun deleteMovie(movie: MovieDetail) {
         viewModelScope.launch {
             movieRepository.deleteMovie(movie)

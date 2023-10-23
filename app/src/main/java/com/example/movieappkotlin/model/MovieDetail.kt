@@ -10,6 +10,7 @@ data class MovieDetail (
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id"                    ) var id                  : Int?                           = null,
     @SerializedName("original_title"        ) var originalTitle       : String?                        = null,
+    @SerializedName("poster_path"           ) var posterPath          : String?                        = null,
     @SerializedName("adult"                 ) var adult               : Boolean?                       = null,
     @SerializedName("backdrop_path"         ) var backdropPath        : String?                        = null,
     @SerializedName("budget"                ) var budget              : Int?                           = null,
@@ -18,7 +19,6 @@ data class MovieDetail (
     @SerializedName("original_language"     ) var originalLanguage    : String?                        = null,
     @SerializedName("overview"              ) var overview            : String?                        = null,
     @SerializedName("popularity"            ) var popularity          : Double?                        = null,
-    @SerializedName("poster_path"           ) var posterPath          : String?                        = null,
     @SerializedName("release_date"          ) var releaseDate         : String?                        = null,
     @SerializedName("revenue"               ) var revenue             : Int?                           = null,
     @SerializedName("runtime"               ) var runtime             : Int?                           = null,

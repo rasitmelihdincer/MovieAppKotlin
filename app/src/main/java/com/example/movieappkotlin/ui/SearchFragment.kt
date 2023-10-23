@@ -17,16 +17,17 @@ import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 import com.example.movieappkotlin.viewmodel.MovieViewModel
 import com.example.movieappkotlin.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
-    lateinit var searchAdapter : FavoriteMoviesAdapter
-    private lateinit var  viewModel  : SearchViewModel
+    private lateinit var searchAdapter : FavoriteMoviesAdapter
+    private  val  viewModel  : SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +44,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = MovieRepository(MovieDatabase(requireContext()))
-        viewModel = SearchViewModel(repository)
-
-
-
         setUpRecyclerView()
-
         var job : Job? = null
         binding.searchButton.addTextChangedListener {editable ->
             job?.cancel()

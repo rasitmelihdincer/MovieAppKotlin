@@ -15,19 +15,18 @@ import com.example.movieappkotlin.databinding.FragmentMovieBinding
 import com.example.movieappkotlin.local.MovieDao
 import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.model.MovieDetail
+import com.example.movieappkotlin.repo.MovieRepository
 
 import com.example.movieappkotlin.viewmodel.MovieViewModel
+import com.example.movieappkotlin.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
-
+@AndroidEntryPoint
 class MovieFragment : Fragment() {
 
     private lateinit var binding : FragmentMovieBinding
-    private val viewModel by viewModels<MovieViewModel>()
+    private val  viewModel  : MovieViewModel by viewModels()
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
-    private var movieDao : MovieDao? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +52,8 @@ class MovieFragment : Fragment() {
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
             popularMoviesAdapter = PopularMoviesAdapter(it, object : PopularMoviesAdapter.MovieClick{
-                override fun movieClicked(movieId: Int, movieTitle: String) {
-                    val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieId,movieTitle)
+                override fun movieClicked(movieId: Int, movieTitle: String,moviePoster : String) {
+                    val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieId,movieTitle,moviePoster)
                     findNavController().navigate(action)
                 }
 

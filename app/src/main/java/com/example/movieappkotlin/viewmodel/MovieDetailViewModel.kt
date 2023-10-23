@@ -10,9 +10,13 @@ import com.example.movieappkotlin.local.MovieDao
 import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.util.Constants
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
-class MovieDetailViewModel( val movieRepository: MovieRepository) : ViewModel() {
+import javax.inject.Inject
+import javax.inject.Singleton
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor( val movieRepository: MovieRepository) : ViewModel() {
 
     var movieDetailList = MutableLiveData<MovieDetail>()
     var isloading = MutableLiveData<Boolean>()
