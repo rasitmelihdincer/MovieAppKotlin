@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "537772127413",
+    "project_id": "movieappkotlin-8f5bd",
+    "storage_bucket": "movieappkotlin-8f5bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537772127413:android:9a4a830d59bacf4aaabafc",
+        "android_client_info": {
+          "package_name": "com.example.movieappkotlin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCxo8s2wq_XcqEO8DrsPDsaYTVL6tr6w8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

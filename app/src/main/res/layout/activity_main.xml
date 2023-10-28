@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
@@ -24,7 +24,7 @@
         android:background="#282f32"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
-        app:itemRippleColor="@color/green"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

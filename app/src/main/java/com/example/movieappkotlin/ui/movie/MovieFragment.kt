@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.ui
+package com.example.movieappkotlin.ui.movie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,15 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieappkotlin.Adapter.PopularMoviesAdapter
 import com.example.movieappkotlin.databinding.FragmentMovieBinding
-import com.example.movieappkotlin.local.MovieDao
-import com.example.movieappkotlin.local.MovieDatabase
-import com.example.movieappkotlin.model.MovieDetail
-import com.example.movieappkotlin.repo.MovieRepository
 
-import com.example.movieappkotlin.viewmodel.MovieViewModel
-import com.example.movieappkotlin.viewmodel.SearchViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +23,7 @@ class MovieFragment : Fragment() {
     private lateinit var binding : FragmentMovieBinding
     private val  viewModel  : MovieViewModel by viewModels()
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +44,22 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeLiveData()
+        auth = Firebase.auth
+        binding.logoutButton.setOnClickListener {
+            auth.signOut()
+            val action = MovieFragmentDirections.actionMovieFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
 
     }
     private fun observeLiveData(){
         viewModel.movieList.observe(viewLifecycleOwner){
             popularMoviesAdapter = PopularMoviesAdapter(it, object : PopularMoviesAdapter.MovieClick{
                 override fun movieClicked(movieId: Int, movieTitle: String,moviePoster : String) {
-                    val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movieId,movieTitle,moviePoster)
+                    val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(
+                            movieId, movieTitle, moviePoster,
+
+                            )
                     findNavController().navigate(action)
                 }
 

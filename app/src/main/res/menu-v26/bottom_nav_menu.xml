@@ -14,6 +14,8 @@
         android:icon="@drawable/btn_2"/>
     <item android:id="@+id/searchFragment"
         android:title="Search"
+        android:icon="@drawable/search"
+        android:iconTint="@color/white"
         />
 
 </menu>

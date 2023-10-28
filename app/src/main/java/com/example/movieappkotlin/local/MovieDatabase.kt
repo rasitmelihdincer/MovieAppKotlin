@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.movieappkotlin.model.MovieDetail
-import java.util.concurrent.locks.Lock
 
 
 @Database(entities = [MovieDetail::class], version = 1 , exportSchema = false)
@@ -27,7 +26,8 @@ abstract class MovieDatabase : RoomDatabase() {
                 context.applicationContext,
                 MovieDatabase::class.java,
                 "movie-db"
-            ).allowMainThreadQueries().build()
+            ).allowMainThreadQueries().fallbackToDestructiveMigration()
+                .build()
         }
     }
 }

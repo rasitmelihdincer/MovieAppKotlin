@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.ui
+package com.example.movieappkotlin.ui.moviedetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.movieappkotlin.R
 
 import com.example.movieappkotlin.databinding.FragmentMovieDetailBinding
 import com.example.movieappkotlin.model.MovieDetail
 
 import com.example.movieappkotlin.util.loadImage
-import com.example.movieappkotlin.viewmodel.MovieDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,10 +23,8 @@ class MovieDetailFragment : Fragment() {
     private lateinit var binding : FragmentMovieDetailBinding
     private val viewModel: MovieDetailViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -40,19 +39,20 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.getDetailData(requireArguments().getInt("movieId"))
         binding.backButton.setOnClickListener {
             val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieFragment()
             findNavController().navigate(action)
         }
-
         binding.favoriteButton.setOnClickListener {
             viewModel.savedMovie(MovieDetail(requireArguments().getInt("movieId"),requireArguments().getString("movieTitle"),requireArguments().getString("moviePoster")))
-            Toast.makeText(requireContext(),"Added to Favorites",Toast.LENGTH_LONG).show()
+            binding.favoriteButton.backgroundTintList = ContextCompat.getColorStateList(requireContext(),R.color.pink)
+            Toast.makeText(requireContext(),"Saved",Toast.LENGTH_SHORT).show()
         }
         observeData()
+
     }
+
 
     private fun observeData(){
         viewModel.isloading.observe(viewLifecycleOwner){

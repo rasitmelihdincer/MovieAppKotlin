@@ -1,22 +1,16 @@
-package com.example.movieappkotlin.ui
-import android.app.AlertDialog
+package com.example.movieappkotlin.ui.favorite
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
 
 import com.example.movieappkotlin.databinding.FragmentFavoriteBinding
-import com.example.movieappkotlin.local.MovieDatabase
-import com.example.movieappkotlin.repo.MovieRepository
-import com.example.movieappkotlin.viewmodel.FavoriteViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +44,6 @@ class FavoriteFragment : Fragment() {
         favoriteViewModel.getSavedMovie().observe(viewLifecycleOwner, Observer {
             favoriteAdapter.differ.submitList(it)
         })
-
 
     }
     private fun setUpRecyclerView(){

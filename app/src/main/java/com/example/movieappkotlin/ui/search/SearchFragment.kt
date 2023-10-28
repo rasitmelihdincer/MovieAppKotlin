@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.ui
+package com.example.movieappkotlin.ui.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,14 +9,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieappkotlin.Adapter.FavoriteMoviesAdapter
-import com.example.movieappkotlin.R
+import com.example.movieappkotlin.ui.favorite.FavoriteMoviesAdapter
 import com.example.movieappkotlin.databinding.FragmentSearchBinding
-import com.example.movieappkotlin.local.MovieDatabase
-import com.example.movieappkotlin.repo.MovieRepository
-import com.example.movieappkotlin.viewmodel.FavoriteViewModel
-import com.example.movieappkotlin.viewmodel.MovieViewModel
-import com.example.movieappkotlin.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope

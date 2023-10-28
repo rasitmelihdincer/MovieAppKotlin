@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.viewmodel
+package com.example.movieappkotlin.ui.favorite
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -26,14 +26,10 @@ class FavoriteViewModel @Inject constructor(val movieRepository: MovieRepository
     }
 
     fun getSavedMovie() = movieRepository.getFavoriteMovie()
+
     fun deleteMovie(movie: MovieDetail) {
         viewModelScope.launch {
             movieRepository.deleteMovie(movie)
         }
     }
-
-
-
-
-
 }

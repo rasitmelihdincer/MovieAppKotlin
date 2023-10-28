@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs")
     id("com.google.dagger.hilt.android")
     id ("kotlin-parcelize")
+    id("com.google.gms.google-services")
     kotlin("kapt")
 }
 
@@ -88,6 +89,11 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:2.48.1")
     annotationProcessor ("com.google.dagger:hilt-compiler:2.48.1")
     kapt ("com.google.dagger:hilt-compiler:2.48.1")
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+
 
 
 }

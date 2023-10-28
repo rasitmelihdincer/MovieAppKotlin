@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SearchFragment"
+    tools:context=".ui.search.SearchFragment"
     android:background="@color/main_bacground"
     >
 
@@ -41,6 +41,7 @@
             android:paddingLeft="20dp"
             android:drawablePadding="5dp"
             android:hint="Search"
+            android:textColor="@color/white"
         />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

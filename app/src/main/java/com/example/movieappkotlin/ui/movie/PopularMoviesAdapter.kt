@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.Adapter
+package com.example.movieappkotlin.ui.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,8 @@ import com.example.movieappkotlin.util.loadImage
 
 class PopularMoviesAdapter(private val populerMoviesList : List<MovieDetail>?, private val movieClickListener : MovieClick) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: PopularMoviesItemsBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: PopularMoviesItemsBinding) : RecyclerView.ViewHolder(binding.root)
 
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -39,10 +37,9 @@ class PopularMoviesAdapter(private val populerMoviesList : List<MovieDetail>?, p
                         it2
                     )
                 } }
+
             }
-
         }
-
     }
     interface MovieClick {
         fun movieClicked(movieId: Int , movieTitle : String, moviePoster : String)

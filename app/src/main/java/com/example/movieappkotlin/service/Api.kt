@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.Service
+package com.example.movieappkotlin.service
 
 import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.model.MovieResponse
@@ -15,7 +15,7 @@ interface Api {
      suspend fun getMovies(@Header("Authorization") token:String ) : Response<MovieResponse>
 
      @GET("3/movie/{movieId}")
-     suspend fun getMovieDetail(@Path("movieId") movieId : String,@Header("Authorization") token: String) : Response<MovieDetail>
+     suspend fun getMovieDetail(@Path("movieId") movieId : Int,@Header("Authorization") token: String) : Response<MovieDetail>
 
      @GET("3/search/movie")
      suspend fun getSearchMovie(@Query("query") query : String,@Query("page") page : Int = 1,@Header("Authorization") token: String) : Response<MovieResponse>

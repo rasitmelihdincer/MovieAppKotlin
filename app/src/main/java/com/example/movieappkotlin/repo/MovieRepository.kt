@@ -1,9 +1,7 @@
 package com.example.movieappkotlin.repo
 
 
-import com.example.movieappkotlin.Service.Api
-import com.example.movieappkotlin.Service.ApiService
-import com.example.movieappkotlin.local.MovieDao
+import com.example.movieappkotlin.service.ApiService
 import com.example.movieappkotlin.local.MovieDatabase
 import com.example.movieappkotlin.model.MovieDetail
 import com.example.movieappkotlin.util.Constants
@@ -20,4 +18,6 @@ class MovieRepository @Inject constructor(private val movieDb: MovieDatabase){
     suspend fun searchMovie(query : String,pageNumber : Int) = ApiService.getData().getSearchMovie(query,pageNumber,Constants.TOKEN)
 
     suspend fun getMovieFromApi() = ApiService.getData().getMovies(Constants.TOKEN)
+
+    suspend fun getMovieDetailFromApi(movieId : Int) = ApiService.getData().getMovieDetail(movieId,Constants.TOKEN)
 }

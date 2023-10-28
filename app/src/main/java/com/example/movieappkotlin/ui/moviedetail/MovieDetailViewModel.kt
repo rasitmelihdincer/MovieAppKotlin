@@ -1,20 +1,16 @@
-package com.example.movieappkotlin.viewmodel
+package com.example.movieappkotlin.ui.moviedetail
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappkotlin.model.MovieDetail
-import com.example.movieappkotlin.Service.ApiService
-import com.example.movieappkotlin.local.MovieDao
-import com.example.movieappkotlin.local.MovieDatabase
+import com.example.movieappkotlin.service.ApiService
 import com.example.movieappkotlin.repo.MovieRepository
 import com.example.movieappkotlin.util.Constants
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
+
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor( val movieRepository: MovieRepository) : ViewModel() {
 
@@ -27,7 +23,7 @@ class MovieDetailViewModel @Inject constructor( val movieRepository: MovieReposi
         try {
             isloading.value = true
             error.value = false
-            val response = ApiService.getData().getMovieDetail(movieId.toString(),Constants.TOKEN)
+            val response = movieRepository.getMovieDetailFromApi(movieId)
             if (response.isSuccessful){
                 isloading.value = false
                 movieDetailList.value = response.body()

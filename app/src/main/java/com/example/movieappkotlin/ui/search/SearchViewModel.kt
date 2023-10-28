@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.viewmodel
+package com.example.movieappkotlin.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

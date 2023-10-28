@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.Service
+package com.example.movieappkotlin.service
 
 import com.example.movieappkotlin.util.Constants
 import okhttp3.OkHttpClient

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MovieDetailFragment"
+    tools:context=".ui.moviedetail.MovieDetailFragment"
     android:background="@color/main_bacground"
     >
 
@@ -140,28 +140,11 @@
         <TextView
             android:id="@+id/movieSummary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:text="Movie Summary Movie Summary Movie Summary Movie Summary Movie Summary"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Actors"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Movie Summary Movie Summary"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
     </LinearLayout>
 
 
